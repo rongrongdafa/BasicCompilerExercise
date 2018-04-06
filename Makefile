@@ -29,15 +29,17 @@ LIB_OBJ=$(addprefix $(BUILD_PATH),$(LIB_OBJ_FILES))
 
 OUT=test1.out
 
+C_FLAGS="-O3"
+LD_FLAGS=
 
 all:$(OUT)
 $(BUILD_PATH):
 	mkdir $(BUILD_PATH)
 
 $(OUT): $(BUILD_PATH) $(LIB_OBJ) $(SRC_PATH)main.cpp
-	g++ -o $@ $(LIB_OBJ) $(SRC_PATH)main.cpp
+	g++ $(C_FLAGS) $(LD_FLAGS) -o $@ $(LIB_OBJ) $(SRC_PATH)main.cpp
 $(BUILD_PATH)%.o:$(SRC_PATH)%.cpp
-	g++ -c -o $@ $^
+	g++  $(C_FLAGS) -c -o $@ $^
 
 clean:
 	rm -r $(BUILD_PATH)
